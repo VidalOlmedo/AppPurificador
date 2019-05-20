@@ -1,6 +1,6 @@
 int relay = 8;
 int estadoVent = 0;
-int modo = 0;
+//int modo = 0;
 
 void automatico();
 void manual();
@@ -30,7 +30,7 @@ void loop() {
   if(Serial.available() ){
       int entrada = Serial.read();
       
-      if(entrada == 2 && modo == 0){
+      if(entrada == 2){
           manual();
       }
     
@@ -62,6 +62,8 @@ void loop() {
 
 void automatico(){
   int voltaje = analogRead(A0);
+
+  //Serial.println("SI SE EJECUTA ESTE BLOQUE");
   
   if(voltaje > 200){
      digitalWrite(relay, LOW);   //LOW ACTIVA EL RELAY
@@ -73,7 +75,7 @@ void automatico(){
 
   enviarMediciones();
 
-  modo = 0;
+  //modo = 0;
 }
 
 void manual(){
@@ -96,7 +98,7 @@ void manual(){
           }
           
           else if(entrada == 2){
-             continue;
+             break;
           }
 
           else{ //entrada == 4
@@ -107,7 +109,7 @@ void manual(){
       enviarMediciones();
   }
 
-  modo = 1;
+  //modo = 0;
 }
 
 /*void error(){
