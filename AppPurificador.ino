@@ -17,16 +17,6 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  /*if(Serial.available() ){
-    modo = Serial.read();
-    if(modo == 3){
-        manual();
-    }
-
-    if(modo == 4){
-        error();
-    }
-  }*/
   if(Serial.available() ){
       int entrada = Serial.read();
       
@@ -36,29 +26,12 @@ void loop() {
     
       else if(entrada == 4){
           Serial.println("ERROR");
-          //automatico();
       }
   }
   
   automatico();
 }
 
-/*void serialEvent(){
-  while(Serial.available() ){
-    
-      if(Serial.read() == 3){
-          manual();
-      }
-    
-      else if(Serial.read() == 4){
-          automatico();
-      }
-
-      else{
-          break;
-      }
-  }
-}*/
 
 void automatico(){
   int voltaje = analogRead(A0);
@@ -74,8 +47,6 @@ void automatico(){
   }
 
   enviarMediciones();
-
-  //modo = 0;
 }
 
 void manual(){
@@ -108,29 +79,17 @@ void manual(){
 
       enviarMediciones();
   }
-
-  //modo = 0;
 }
 
-/*void error(){
-    Serial.println("olakase");
-    Serial.println("olakase");
-    Serial.println("olakase");
-    Serial.println("olakase");
-    Serial.println("olakase");
-    Serial.println("olakase");
-}*/
 
 void enviarMediciones(){
-    String sensorOutput = String(analogRead(A0));
-    Serial.print(sensorOutput + ",");
-    /*Serial.print(",");
-
-    if(Serial.available() && Serial.read() == 4){
-        Serial.println("olakase");
-    }
-  
-    int ppm = map(sensorOutput, 0, 1023, 20, 10000);
-    Serial.println(ppm);
-    delay(1000);*/
+    //String sensorOutput = String(analogRead(A0));
+    //Serial.print(sensorOutput + ",");
+    
+    int sensorOutput = analogRead(A0);
+    sensorOutput = map(sensorOutput, 0, 1023, 100, 10000);
+    
+    //int ppm = sensorOutput.toInt();
+    String ppm = String(sensorOutput);
+    Serial.print(ppm + ",");
 }
