@@ -35,14 +35,15 @@ void loop() {
 
 void automatico(){
   int voltaje = analogRead(A0);
+  voltaje = voltaje * 5.5;
 
   //Serial.println("SI SE EJECUTA ESTE BLOQUE");
   
-  if(voltaje > 200){
+  if(voltaje > 1000){
      digitalWrite(relay, LOW);   //LOW ACTIVA EL RELAY
   }
   
-  if(voltaje < 200){
+  if(voltaje < 1000){
      digitalWrite(relay, HIGH);  //HIGH DESACTIVA EL RELAY
   }
 
@@ -87,7 +88,8 @@ void enviarMediciones(){
     //Serial.print(sensorOutput + ",");
     
     int sensorOutput = analogRead(A0);
-    sensorOutput = map(sensorOutput, 0, 1023, 100, 10000);
+    //sensorOutput = map(sensorOutput, 0, 1023, 100, 10000);
+    sensorOutput = sensorOutput * 5.5;
     
     //int ppm = sensorOutput.toInt();
     String ppm = String(sensorOutput);
